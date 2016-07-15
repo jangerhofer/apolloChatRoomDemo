@@ -13,7 +13,7 @@ let extractCSS = new ExtractTextPlugin('[name].[chunkhash].css');
 
 
 const PATHS = {
-    app: path.join(__dirname, 'src'),
+    app: path.join(__dirname, 'client'),
     build: path.join(__dirname, 'dist')
 };
 
@@ -25,7 +25,6 @@ const common = {
     // convenient with more complex configurations.
     entry: {
         app: PATHS.app + "/index.jsx",
-        vendor: Object.keys(pkg.dependencies)
     },
     output: {
         path: PATHS.build,
@@ -33,7 +32,7 @@ const common = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html'
+            template: './client/index.html'
         })
     ],
     module : {
@@ -42,7 +41,7 @@ const common = {
           exclude: /(node_modules|bower_components)/,
           loader: 'babel', // 'babel-loader' is also a legal name to reference
           query: {
-              presets: ['react', 'es2015']
+              presets: ['react', 'es2015', 'react-hmre']
           }
       }]
     }
